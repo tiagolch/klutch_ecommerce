@@ -8,6 +8,11 @@ class Customers(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
 
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Customer'
+        verbose_name_plural = 'Customers'
+
     def __str__(self):
         return self.name
 
@@ -25,6 +30,11 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
 
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+
     def __str__(self):
         return self.name
 
@@ -37,9 +47,13 @@ class Products(models.Model):
 
 class Orders(models.Model):
     customer_id = models.ForeignKey('Customers', on_delete=models.DO_NOTHING, verbose_name='Customers ID')
-    produtcts_id = models.ForeignKey('Products', on_delete=models.DO_NOTHING, verbose_name='Products ID')
+    produtcts_id = models.ForeignKey('Products', on_delete=models.DO_NOTHING, related_name='produtos', verbose_name='Products ID')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
+
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
 
     def __str__(self):
         return f'{str(self.customer_id)} - {str(self.produtcts_id)}'
