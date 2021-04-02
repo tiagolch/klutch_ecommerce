@@ -47,7 +47,7 @@ class Products(models.Model):
 
 class Orders(models.Model):
     customer_id = models.ForeignKey('Customers', on_delete=models.DO_NOTHING, verbose_name='Customers ID')
-    produtcts_id = models.ForeignKey('Products', on_delete=models.DO_NOTHING, related_name='produtos', verbose_name='Products ID')
+    produtcts_id = models.ManyToManyField('Products', related_name='orders_products')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
 
@@ -56,7 +56,7 @@ class Orders(models.Model):
         verbose_name_plural = 'Orders'
 
     def __str__(self):
-        return f'{str(self.customer_id)} - {str(self.produtcts_id)}'
+        return f'{self.customer_id}'
 
     def get_created_at(self):
         return self.created_at.strftime('%d/%m/%Y %H:%M:%S')

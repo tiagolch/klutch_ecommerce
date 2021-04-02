@@ -14,5 +14,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Orders)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['customer_id', 'produtcts_id', 'get_created_at', 'get_updated_at' ]
+    list_display = ['customer_id', 'get_created_at', 'get_updated_at']
+
 
